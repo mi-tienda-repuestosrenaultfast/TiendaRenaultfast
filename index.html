@@ -2,55 +2,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RENAULT FAST</title>
   <style>
     body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
-    header { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 2em; }
+    header { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 2em; position: sticky; top: 0; z-index: 10; }
+    .search-bar { text-align: center; margin: 10px; }
+    .search-bar input { padding: 8px; width: 80%; max-width: 400px; font-size: 1em; }
     .product-list { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
     .product { background: white; border: 1px solid #ccc; border-radius: 10px; width: 300px; margin: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .product img { width: 100%; border-radius: 10px; }
-    .product h3 { font-size: 1.1em; margin: 10px 0 5px; }
+    .product h3 { font-size: 1em; margin: 10px 0 5px; }
     .product p { font-size: 0.9em; color: #333; }
     .price { font-weight: bold; color: green; }
-    .add-btn { margin-top: 10px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; }
+    .add-btn { margin-top: 10px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+    .whatsapp-btn, .top-btn {
+      position: fixed; bottom: 20px; padding: 15px; border: none; border-radius: 10px;
+      font-size: 14px; cursor: pointer; z-index: 100;
+    }
+    .whatsapp-btn { right: 20px; background: #25D366; color: white; }
+    .top-btn { left: 20px; background: #333; color: white; }
   </style>
 </head>
 <body>
   <header>RENAULT FAST</header>
+  <div class="search-bar"><input type="text" id="searchInput" placeholder="Buscar producto por nombre..." onkeyup="filterProducts()" /></div>
   <div class="product-list" id="products"></div>
-  <button class="whatsapp-btn" onclick="sendWhatsApp()">Enviar</button>
-
+  <button class="top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Inicio</button>
+  <button class="whatsapp-btn" onclick="sendWhatsApp()">Enviar a WhatsApp Ventas</button>
   <script>
     const products = [
-      { name: "Producto 1", img: "product_1.jpg", price: 224.42 },
-      { name: "Producto 2", img: "product_2.jpg", price: 464.34 },
-      { name: "Producto 3", img: "product_3.jpg", price: 574.31 },
-      { name: "Producto 4", img: "product_4.jpg", price: 12.24 },
-      { name: "Producto 5", img: "product_5.jpg", price: 9.31 },
-      { name: "Producto 6", img: "product_6.jpg", price: 104.72 },
-      { name: "Producto 7", img: "product_7.jpg", price: 83.17 },
-      { name: "Producto 8", img: "product_8.jpg", price: 104.72 },
-      { name: "Producto 9", img: "product_9.jpg", price: 83.17 },
-      { name: "Producto 10", img: "product_10.jpg", price: 20.37 }
-    ];
+{ name: "Producto 1", img: "product_1.jpg", price: 100.00 },
+{ name: "Producto 2", img: "product_2.jpg", price: 100.00 },
+{ name: "Producto 3", img: "product_3.jpg", price: 100.00 },
+{ name: "Producto 4", img: "product_4.jpg", price: 100.00 },
+{ name: "Producto 5", img: "product_5.jpg", price: 100.00 },
+{ name: "Producto 6", img: "product_6.jpg", price: 100.00 },
+{ name: "Producto 7", img: "product_7.jpg", price: 100.00 },
+{ name: "Producto 8", img: "product_8.jpg", price: 100.00 },
+{ name: "Producto 9", img: "product_9.jpg", price: 100.00 },
+{ name: "Producto 10", img: "product_10.jpg", price: 100.00 },
+{ name: "Producto 11", img: "product_11.jpg", price: 100.00 },
+{ name: "Producto 12", img: "product_12.jpg", price: 100.00 },
+{ name: "Producto 13", img: "product_13.jpg", price: 100.00 },
+{ name: "Producto 14", img: "product_14.jpg", price: 100.00 },
+{ name: "Producto 15", img: "product_15.jpg", price: 100.00 },
+{ name: "Producto 16", img: "product_16.jpg", price: 100.00 },
+{ name: "Producto 17", img: "product_17.jpg", price: 100.00 },
+{ name: "Producto 18", img: "product_18.jpg", price: 100.00 },
+{ name: "Producto 19", img: "product_19.jpg", price: 100.00 },
+{ name: "Producto 20", img: "product_20.jpg", price: 100.00 },
+{ name: "Producto 21", img: "product_21.jpg", price: 100.00 },
+{ name: "Producto 22", img: "product_22.jpg", price: 100.00 },
+{ name: "Producto 23", img: "product_23.jpg", price: 100.00 },
+{ name: "Producto 24", img: "product_24.jpg", price: 100.00 },
+{ name: "Producto 25", img: "product_25.jpg", price: 100.00 },
+{ name: "Producto 26", img: "product_26.jpg", price: 100.00 },
+{ name: "Producto 27", img: "product_27.jpg", price: 100.00 },
+{ name: "Producto 28", img: "product_28.jpg", price: 100.00 },
+{ name: "Producto 29", img: "product_29.jpg", price: 100.00 },
+{ name: "Producto 30", img: "product_30.jpg", price: 100.00 },
+{ name: "Producto 31", img: "product_31.jpg", price: 100.00 },
+{ name: "Producto 32", img: "product_32.jpg", price: 100.00 },
+{ name: "Producto 33", img: "product_33.jpg", price: 100.00 },
+{ name: "Producto 34", img: "product_34.jpg", price: 100.00 },
+{ name: "Producto 35", img: "product_35.jpg", price: 100.00 },
+{ name: "Producto 36", img: "product_36.jpg", price: 100.00 },
+{ name: "Producto 37", img: "product_37.jpg", price: 100.00 },
+{ name: "Producto 38", img: "product_38.jpg", price: 100.00 },
+{ name: "Producto 39", img: "product_39.jpg", price: 100.00 },
+{ name: "Producto 40", img: "product_40.jpg", price: 100.00 },
+{ name: "Producto 41", img: "product_41.jpg", price: 100.00 },
+{ name: "Producto 42", img: "product_42.jpg", price: 100.00 },
+{ name: "Producto 43", img: "product_43.jpg", price: 100.00 },
+{ name: "Producto 44", img: "product_44.jpg", price: 100.00 },
+{ name: "Producto 45", img: "product_45.jpg", price: 100.00 },
+{ name: "Producto 46", img: "product_46.jpg", price: 100.00 },
+{ name: "Producto 47", img: "product_47.jpg", price: 100.00 },
+{ name: "Producto 48", img: "product_48.jpg", price: 100.00 },
+{ name: "Producto 49", img: "product_49.jpg", price: 100.00 },
+{ name: "Producto 50", img: "product_50.jpg", price: 100.00 },
+{ name: "Producto 51", img: "product_51.jpg", price: 100.00 },
+{ name: "Producto 52", img: "product_52.jpg", price: 100.00 },
+{ name: "Producto 53", img: "product_53.jpg", price: 100.00 },
+{ name: "Producto 54", img: "product_54.jpg", price: 100.00 },
+{ name: "Producto 55", img: "product_55.jpg", price: 100.00 },
+{ name: "Producto 56", img: "product_56.jpg", price: 100.00 },
+{ name: "Producto 57", img: "product_57.jpg", price: 100.00 },
+{ name: "Producto 58", img: "product_58.jpg", price: 100.00 },
+{ name: "Producto 59", img: "product_59.jpg", price: 100.00 },
+{ name: "Producto 60", img: "product_60.jpg", price: 100.00 },
 
+    ];
     const cart = [];
     const container = document.getElementById('products');
 
-    products.forEach((p, index) => {
-      const div = document.createElement('div');
-      div.className = 'product';
-      div.innerHTML = `
-        <img src="${p.img}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p class="price">$${p.price.toFixed(2)}</p>
-        <button class="add-btn" onclick="addToCart(${index})">Agregar al carrito</button>
-      `;
-      container.appendChild(div);
-    });
+    function renderProducts() {
+      container.innerHTML = "";
+      products.forEach((p, index) => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p class="price">$${p.price.toFixed(2)}</p>
+          <button class="add-btn" onclick="addToCart(${index})">Agregar al carrito</button>
+        `;
+        container.appendChild(div);
+      });
+    }
 
     function addToCart(index) {
       cart.push(products[index]);
@@ -69,6 +130,16 @@
       const phone = "593987292577";
       window.open(`https://wa.me/${phone}?text=${text}`);
     }
+
+    function filterProducts() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const items = document.querySelectorAll('.product');
+      products.forEach((p, i) => {
+        items[i].style.display = p.name.toLowerCase().includes(query) ? 'block' : 'none';
+      });
+    }
+
+    renderProducts();
   </script>
 </body>
 </html>
