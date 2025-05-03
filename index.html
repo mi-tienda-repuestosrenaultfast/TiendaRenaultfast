@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RENAULT FAST</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+    header { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 2em; }
+    .product-list { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+    .product { background: white; border: 1px solid #ccc; border-radius: 10px; width: 300px; margin: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .product img { width: 100%; border-radius: 10px; }
+    .product h3 { font-size: 1.1em; margin: 10px 0 5px; }
+    .product p { font-size: 0.9em; color: #333; }
+    .price { font-weight: bold; color: green; }
+    .add-btn { margin-top: 10px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>RENAULT FAST</header>
+  <div class="product-list" id="products"></div>
+  <button class="whatsapp-btn" onclick="sendWhatsApp()">Enviar</button>
+
+  <script>
+    const products = [
+      { name: "Producto 1", img: "product_1.jpg", price: 224.42 },
+      { name: "Producto 2", img: "product_2.jpg", price: 464.34 },
+      { name: "Producto 3", img: "product_3.jpg", price: 574.31 },
+      { name: "Producto 4", img: "product_4.jpg", price: 12.24 },
+      { name: "Producto 5", img: "product_5.jpg", price: 9.31 },
+      { name: "Producto 6", img: "product_6.jpg", price: 104.72 },
+      { name: "Producto 7", img: "product_7.jpg", price: 83.17 },
+      { name: "Producto 8", img: "product_8.jpg", price: 104.72 },
+      { name: "Producto 9", img: "product_9.jpg", price: 83.17 },
+      { name: "Producto 10", img: "product_10.jpg", price: 20.37 }
+    ];
+
+    const cart = [];
+    const container = document.getElementById('products');
+
+    products.forEach((p, index) => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p class="price">$${p.price.toFixed(2)}</p>
+        <button class="add-btn" onclick="addToCart(${index})">Agregar al carrito</button>
+      `;
+      container.appendChild(div);
+    });
+
+    function addToCart(index) {
+      cart.push(products[index]);
+      alert(`${products[index].name} agregado al carrito.`);
+    }
+
+    function sendWhatsApp() {
+      if(cart.length === 0) return alert("Tu carrito está vacío.");
+      let total = 0;
+      let text = "Hola, quiero comprar los siguientes repuestos:%0A";
+      cart.forEach(p => {
+        text += `- ${p.name} ($${p.price.toFixed(2)})%0A`;
+        total += p.price;
+      });
+      text += `%0ATotal: $${total.toFixed(2)}`;
+      const phone = "593987292577";
+      window.open(`https://wa.me/${phone}?text=${text}`);
+    }
+  </script>
+</body>
+</html>
